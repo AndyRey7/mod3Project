@@ -1,5 +1,6 @@
 * {
     padding: 0; margin: 0;
+
 }
 canvas {
     background: #eee; display: block; margin: 0 auto;
@@ -7,6 +8,8 @@ canvas {
 
 h1 {
     color: blue;
+    font-family: 'Press Start 2P', cursive;
+
 }
 
 #gameCanvas {
