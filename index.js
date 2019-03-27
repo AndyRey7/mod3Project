@@ -12,13 +12,13 @@
         const ROID_SIZE = 100; // starting size of asteroids in pixels
         const ROID_SPD = 50; // max starting speed of asteroids in pixels per second
         const ROID_VERT = 10; // average number of vertices on each asteroid
-        const SAVE_KEY_SCORE = 0.1; // save key for local storage of high score
+        const SAVE_KEY_SCORE = "highscore"; // save key for local storage of high score
         const SHIP_BLINK_DUR = 0.1; // duration in seconds of a single blink during ship's invisibility
         const SHIP_EXPLODE_DUR = 0.3; // duration of the ship's explosion in seconds
         const SHIP_INV_DUR = 3; // duration of the ship's invisibility in seconds
         const SHIP_SIZE = 30; // ship height in pixels
         const SHIP_THRUST = 5; // acceleration of the ship in pixels per second per second
-        const SHIP_TURN_SPD = 360; // turn speed in degrees per second
+        const SHIP_TURN_SPD = 200; // turn speed in degrees per second
         const SHOW_BOUNDING = false; // show or hide collision bounding
         const SHOW_CENTRE_DOT = false; // show or hide ship's centre dot
         const TEXT_FADE_TIME = 2.5; // text fade time in seconds
@@ -30,7 +30,7 @@
         const ctx = canv.getContext("2d");
 
         // setup the game parameters
-        var level, roids, lives, ship, text, textAlpha,score,scoreHigh;
+        var level, roids, lives, score, scoreHigh, ship, text, textAlpha;
         newGame();
 
 
@@ -101,6 +101,12 @@
 
             }
 
+            //check High Score
+            if (score > scoreHigh) {
+              scoreHigh = score;
+              localStorage.setItem(SAVE_KEY_SCORE,scoreHigh);
+            }
+
             // destroy the asteroid
             roids.splice(index, 1);
 
@@ -111,11 +117,8 @@
             }
         }
 
-        //check High Score
-        if (score > scoreHigh) {
-          score = scoreHigh;
-          localStorage.setItem(SAVE_KEY_SCORE,scoreHigh);
-        }
+
+
 
         function distBetweenPoints(x1, y1, x2, y2) {
             return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
@@ -221,9 +224,8 @@
             lives = GAME_LIVES;
             ship = newShip();
             score =0;
-
             //get high score from local storage
-            var scoreStr = scoreHigh = localStorage.getItem(SAVE_KEY_SCORE);
+            var scoreStr = localStorage.getItem(SAVE_KEY_SCORE);
             if (scoreStr == null) {
               scoreHigh = 0
             }else {
@@ -421,7 +423,7 @@
                 if (ship.lasers[i].explodeTime == 0) {
                     ctx.fillStyle = "salmon";
                     ctx.beginPath();
-                    ctx.arc(ship.lasers[i].x, ship.lasers[i].y, SHIP_SIZE / 15, 0, Math.PI * 2, false);
+                    ctx.arc(ship.lasers[i].x , ship.lasers[i].y , SHIP_SIZE / 5, 0, Math.PI * 2, false);
                     ctx.fill();
                 } else {
                     // draw the eplosion
@@ -461,19 +463,20 @@
                 lifeColor = exploding && i == lives - 1 ? "red" : "white"
                 drawShip(SHIP_SIZE + i * SHIP_SIZE * 1.2, SHIP_SIZE, 0.5 * Math.PI, lifeColor);
             }
-            //draw the score
+            // //draw the score
             ctx.textAlign = "right";
             ctx.textBaseline = "middle";
             ctx.fillStyle = "white";
-            ctx.font = TEXT_SIZE + "px dejavau sans mono";
-            ctx.fillText(score, canv.width / SHIP_SIZE/2, SHIP_SIZE);
+            ctx.font = (TEXT_SIZE * 0.55) + "px dejavau sans mono";
+            ctx.fillText(score, canv.width - SHIP_SIZE/2, SHIP_SIZE);
 
-            //draw the High Score
+            // draw the High Score
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillStyle = "white";
-            ctx.font = TEXT_SIZE + "px dejavau sans mono";
-            ctx.fillText("Best " +scoreHigh, canv.width / SHIP_SIZE/2, SHIP_SIZE);
+            ctx.font = (TEXT_SIZE * 0.55) + "px dejavau sans mono";
+            ctx.fillText("Best " + scoreHigh, canv.width /2, SHIP_SIZE);
+
 
             // detect laser hits on asteroids
             var ax, ay, ar, lx, ly;
@@ -482,7 +485,7 @@
                 // grab the asteroid properties
                 ax = roids[i].x;
                 ay = roids[i].y;
-                ar = roids[i].r;
+                ar = roids[i].r * 1.5; // laser asteroid collision detection/ radius
 
                 // loop over the lasers
                 for (var j = ship.lasers.length - 1; j >= 0; j--) {
