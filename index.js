@@ -5,10 +5,14 @@
         const LASER_MAX = 10; // maximum number of lasers on screen at once
         const LASER_SPD = 500; // speed of lasers in pixels per second
         const ROID_JAG = 0.4; // jaggedness of the asteroids (0 = none, 1 = lots)
+        const ROID_PTS_LGE = 20; // points scored for a large asteroid
+        const ROID_PTS_MED = 50; // points scored for a large asteroid
+        const ROID_PTS_SML = 100; // points scored for a large asteroid
         const ROID_NUM = 3; // starting number of asteroids
         const ROID_SIZE = 100; // starting size of asteroids in pixels
         const ROID_SPD = 50; // max starting speed of asteroids in pixels per second
         const ROID_VERT = 10; // average number of vertices on each asteroid
+        const SAVE_KEY_SCORE = 0.1; // save key for local storage of high score
         const SHIP_BLINK_DUR = 0.1; // duration in seconds of a single blink during ship's invisibility
         const SHIP_EXPLODE_DUR = 0.3; // duration of the ship's explosion in seconds
         const SHIP_INV_DUR = 3; // duration of the ship's invisibility in seconds
@@ -26,7 +30,7 @@
         const ctx = canv.getContext("2d");
 
         // setup the game parameters
-        var level, roids, lives, ship, text, textAlpha;
+        var level, roids, lives, ship, text, textAlpha,score,scoreHigh;
         newGame();
 
 
@@ -87,9 +91,14 @@
             if (r == Math.ceil(ROID_SIZE / 2)) { // large asteroid
                 roids.push(newAsteroid(x, y, Math.ceil(ROID_SIZE / 4)));
                 roids.push(newAsteroid(x, y, Math.ceil(ROID_SIZE / 4)));
+                score += ROID_PTS_LGE
             } else if (r == Math.ceil(ROID_SIZE / 4)) { // medium asteroid
                 roids.push(newAsteroid(x, y, Math.ceil(ROID_SIZE / 8)));
                 roids.push(newAsteroid(x, y, Math.ceil(ROID_SIZE / 8)));
+                score += ROID_PTS_MED
+            }else {
+              score += ROID_PTS_SML
+
             }
 
             // destroy the asteroid
@@ -100,6 +109,12 @@
                 level++;
                 newLevel();
             }
+        }
+
+        //check High Score
+        if (score > scoreHigh) {
+          score = scoreHigh;
+          localStorage.setItem(SAVE_KEY_SCORE,scoreHigh);
         }
 
         function distBetweenPoints(x1, y1, x2, y2) {
@@ -205,6 +220,15 @@
             level = 0;
             lives = GAME_LIVES;
             ship = newShip();
+            score =0;
+
+            //get high score from local storage
+            var scoreStr = scoreHigh = localStorage.getItem(SAVE_KEY_SCORE);
+            if (scoreStr == null) {
+              scoreHigh = 0
+            }else {
+              scoreHigh = parseInt(scoreStr)
+            }
             newLevel();
         }
 
@@ -437,7 +461,19 @@
                 lifeColor = exploding && i == lives - 1 ? "red" : "white"
                 drawShip(SHIP_SIZE + i * SHIP_SIZE * 1.2, SHIP_SIZE, 0.5 * Math.PI, lifeColor);
             }
+            //draw the score
+            ctx.textAlign = "right";
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = "white";
+            ctx.font = TEXT_SIZE + "px dejavau sans mono";
+            ctx.fillText(score, canv.width / SHIP_SIZE/2, SHIP_SIZE);
 
+            //draw the High Score
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = "white";
+            ctx.font = TEXT_SIZE + "px dejavau sans mono";
+            ctx.fillText("Best " +scoreHigh, canv.width / SHIP_SIZE/2, SHIP_SIZE);
 
             // detect laser hits on asteroids
             var ax, ay, ar, lx, ly;
