@@ -181,7 +181,7 @@
         }
 
         function newAsteroid(x, y, r) {
-            var lvlMultipler = 1 + 0.2 * level;
+            var lvlMultipler = 1 + 2 * level;
             var roid = {
                 x: x,
                 y: y,
@@ -424,6 +424,9 @@
                 ctx.fillText(text, canv.width / 2, canv.height * 0.75);
                 textAlpha -= (1.0 / TEXT_FADE_TIME / FPS)
             } else if (ship.dead) {
+                // ctx.fillRect(0, 0, canv.width, canv.height);
+                // let img3 = document.getElementById("soldier");
+                // ctx.drawImage(img3,0,0,canv.width, canv.height);
                 newGame();
             }
 
