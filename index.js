@@ -293,7 +293,7 @@
                 let smallAsteroid = document.getElementById('smallAsteroid');
                 ctx.strokeStyle = "slategrey";
                 ctx.lineWidth = SHIP_SIZE / 20;
-                ctx.drawImage(smallAsteroid, x-(roids[i].r/2), y-(roids[i].r), roids[i].r, roids[i].r)
+                ctx.drawImage(smallAsteroid, x-(roids[i].r+25), y-(roids[i].r+25), roids[i].r*3, roids[i].r*3)
 
                 // get the asteroid properties
                 a = roids[i].a;
@@ -477,7 +477,7 @@
             ctx.textBaseline = "middle";
             ctx.fillStyle = "white";
             ctx.font = (TEXT_SIZE * 0.55) + "px dejavau sans mono";
-            ctx.fillText("Best " + scoreHigh, canv.width /2, SHIP_SIZE);
+            ctx.fillText("Best " + scoreHigh, canv.width / 2, SHIP_SIZE);
 
 
             // detect laser hits on asteroids
