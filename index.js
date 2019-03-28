@@ -19,7 +19,7 @@
         const SHIP_SIZE = 30; // ship height in pixels
         const SHIP_THRUST = 5; // acceleration of the ship in pixels per second per second
         const SHIP_TURN_SPD = 200; // turn speed in degrees per second
-        const SHOW_BOUNDING = false; // show or hide collision bounding
+        const SHOW_BOUNDING = true; // show or hide collision bounding
         const SHOW_CENTRE_DOT = false; // show or hide ship's centre dot
         const TEXT_FADE_TIME = 2.5; // text fade time in seconds
         const TEXT_SIZE = 80; // text font
@@ -127,7 +127,7 @@
         function drawShip(x, y, a, color = "white") {
             let lvl1SpaceShip = document.getElementById("spaceShip");
             // ctx.rotate(ship.rot*Math.PI/180); ----rotates the entire canvas making it trippy.-------->
-            ctx.drawImage(lvl1SpaceShip, ship.x, ship.y, 50, 50);
+            ctx.drawImage(lvl1SpaceShip, ship.x-25, ship.y-25, 50, 50);
             ctx.strokeStyle = color;
             ctx.lineWidth = SHIP_SIZE / 20;
             ctx.beginPath();
@@ -223,7 +223,7 @@
             level = 0;
             lives = GAME_LIVES;
             ship = newShip();
-            score =0;
+            score = 0;
             //get high score from local storage
             var scoreStr = localStorage.getItem(SAVE_KEY_SCORE);
             if (scoreStr == null) {
@@ -293,7 +293,7 @@
                 let smallAsteroid = document.getElementById('smallAsteroid');
                 ctx.strokeStyle = "slategrey";
                 ctx.lineWidth = SHIP_SIZE / 20;
-                ctx.drawImage(smallAsteroid, x, y)
+                ctx.drawImage(smallAsteroid, x-(roids[i].r/2), y-(roids[i].r), roids[i].r, roids[i].r)
 
                 // get the asteroid properties
                 a = roids[i].a;
@@ -382,26 +382,28 @@
                 }
             } else {
                 // draw the explosion (concentric circles of different colours)
-                ctx.fillStyle = "darkred";
-                ctx.beginPath();
-                ctx.arc(ship.x, ship.y, ship.r * 1.7, 0, Math.PI * 2, false);
-                ctx.fill();
-                ctx.fillStyle = "red";
-                ctx.beginPath();
-                ctx.arc(ship.x, ship.y, ship.r * 1.4, 0, Math.PI * 2, false);
-                ctx.fill();
-                ctx.fillStyle = "orange";
-                ctx.beginPath();
-                ctx.arc(ship.x, ship.y, ship.r * 1.1, 0, Math.PI * 2, false);
-                ctx.fill();
-                ctx.fillStyle = "yellow";
-                ctx.beginPath();
-                ctx.arc(ship.x, ship.y, ship.r * 0.8, 0, Math.PI * 2, false);
-                ctx.fill();
-                ctx.fillStyle = "white";
-                ctx.beginPath();
-                ctx.arc(ship.x, ship.y, ship.r * 0.5, 0, Math.PI * 2, false);
-                ctx.fill();
+                let img3 = document.getElementById("img3");
+                ctx.drawImage(img3, ship.x, ship.y, 75, 50)
+                // ctx.fillStyle = "darkred";
+                // ctx.beginPath();
+                // ctx.arc(ship.x, ship.y, ship.r * 1.7, 0, Math.PI * 2, false);
+                // ctx.fill();
+                // ctx.fillStyle = "red";
+                // ctx.beginPath();
+                // ctx.arc(ship.x, ship.y, ship.r * 1.4, 0, Math.PI * 2, false);
+                // ctx.fill();
+                // ctx.fillStyle = "orange";
+                // ctx.beginPath();
+                // ctx.arc(ship.x, ship.y, ship.r * 1.1, 0, Math.PI * 2, false);
+                // ctx.fill();
+                // ctx.fillStyle = "yellow";
+                // ctx.beginPath();
+                // ctx.arc(ship.x, ship.y, ship.r * 0.8, 0, Math.PI * 2, false);
+                // ctx.fill();
+                // ctx.fillStyle = "white";
+                // ctx.beginPath();
+                // ctx.arc(ship.x, ship.y, ship.r * 0.5, 0, Math.PI * 2, false);
+                // ctx.fill();
             }
 
             // show ship's collision circle
