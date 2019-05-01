@@ -1,4 +1,4 @@
-# Mod 3 Final Project
+# Meteoriod Destroyer
 
 One Paragraph of project description goes here
 
