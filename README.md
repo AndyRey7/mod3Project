@@ -1,5 +1,6 @@
 # Meteoriod Destroyer
 
+![Image of Game](./img/gametitle.png)
 Our love of playing classic games was brought to reality by being able to actually re-create one of the classics using JavaScript and HTML5 Canvas. We recreated the classic game Asteroids with some newly added features like a high score for anyone who can top that score and newly added visuals.
 
 
@@ -20,16 +21,9 @@ Steps:
 
 ## Features
 
-* User can sign-up or login and view their profile page
-* User can view a list of Hotels and types of rooms in that hotel
-* User can make a reservation to a room from a hotel
-* User can remove a reservation from their profile page
-* User can delete their account
-
-
-## Screenshot
-
-![Image of Game](./img/gametitle.png)
+* User can control the ship through keyboard strokes or login and view their profile page
+* User can attempt to get the highest score of all participants
+* User can enjoy playing a game to take a load off :)
 
 
 ## Made Using:
