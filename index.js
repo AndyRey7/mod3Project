@@ -19,12 +19,12 @@ const SHIP_INV_DUR = 3; // duration of the ship's invisibility in seconds
 const SHIP_SIZE = 30; // ship height in pixels
 const SHIP_THRUST = 5; // acceleration of the ship in pixels per second per second
 const SHIP_TURN_SPD = 200; // turn speed in degrees per second
-const SHOW_BOUNDING = true; // show or hide collision bounding
+const SHOW_BOUNDING = false; // show or hide collision bounding
 const SHOW_CENTRE_DOT = false; // show or hide ship's centre dot
 const SOUND_ON = true; // handles sound on / off
 const TEXT_FADE_TIME = 2.5; // text fade time in seconds
 const TEXT_SIZE = 80; // text font
-const GAME_LIVES = 1; //how many lives you have
+const GAME_LIVES = 3; //how many lives you have
 const MUSIC_ON = false; // background music
 let gameStarted = false; //states the game state
 
@@ -68,7 +68,7 @@ function intro_screen(){
     ctx.font = "50px Impact";
     ctx.fillStyle = "#0099CC";
     ctx.textAlign = "center";
-    ctx.fillText("Space Game(IDK)", canv.width/2, canv.height/2);
+    ctx.fillText("Meteroid Destroyer", canv.width/2, canv.height/2);
     ctx.font = "20px Arial";
     ctx.fillText("Press Enter To Start", canv.width/2, canv.height/2 + 50);
     ctx.font = "15px Arial";
@@ -140,7 +140,7 @@ function distBetweenPoints(x1, y1, x2, y2) {
 function drawShip(x, y, a, color = "white") {
     let lvl1SpaceShip = document.getElementById("spaceShip");
     // ctx.rotate(ship.rot*Math.PI/180); ----rotates the entire canvas making it trippy.-------->
-    ctx.drawImage(lvl1SpaceShip, ship.x-25, ship.y-25, 50, 50);
+    ctx.drawImage(lvl1SpaceShip,ship.x-25, ship.y-25, 50, 50);
     ctx.strokeStyle = color;
     ctx.lineWidth = SHIP_SIZE / 20;
     ctx.beginPath();
@@ -382,7 +382,7 @@ function update() {
             );
         }
         ctx.closePath();
-        ctx.stroke();
+        //ctx.stroke(); removes asteroid chunks outlines if commented out.
 
         // show asteroid's collision circle
         if (SHOW_BOUNDING) {
