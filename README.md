@@ -13,10 +13,10 @@ Steps:
 
 ## Controls
 
-`arrow key up`  - to thrust up and move forward.
-`arrow key right` - to slow down and turn ship to right 
-`arrow key left` - to slow down and turn ship
-`space bar` - shoots laser
+*`arrow key up`  - to thrust up and move forward.
+*`arrow key right` - to slow down and turn ship to right 
+*`arrow key left` - to slow down and turn ship
+*`space bar` - shoots laser
 
 ## Features
 
