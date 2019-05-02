@@ -29,7 +29,7 @@ Steps:
 
 ## Screenshot
 
-![Image of Game](./img/Screen Shot 2019-05-02 at 1.18.54 PM.png)
+![Image of Game](./img/gametitle.png)
 
 
 ## Made Using:
