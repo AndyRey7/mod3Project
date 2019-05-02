@@ -1,6 +1,6 @@
 # Meteoriod Destroyer
 
-Our love of playing classic games was brought to reality by being able to actually re-create one of the classics using JavaScript and HTML5 Canvas. We recreated the classic game Asteroids with some newly added features like a high score for anyone who can top that score.
+Our love of playing classic games was brought to reality by being able to actually re-create one of the classics using JavaScript and HTML5 Canvas. We recreated the classic game Asteroids with some newly added features like a high score for anyone who can top that score and newly added visuals.
 
 
 ## Getting Started
@@ -29,15 +29,15 @@ Steps:
 
 ## Screenshot
 
-![Image of Homepage](./screenshot/homepage.png)
+![Image of Game](./img/Screen Shot 2019-05-02 at 1.18.54 PM.png)
 
 
 ## Made Using:
 
-* React
+* HTML5 Canvas
 * Ruby on Rails API
-* Google Maps API
-* Styling with ReactStrap, Semantic UI React, CSS
+* JavaScript DOM manipulation with querySelectors
+* Styling with BootStrap CSS
 
 
 ## Authors
