@@ -1,4 +1,4 @@
-# Meteoriod Destroyer
+# Meteoroid Destroyer
 
 ![Image of Game](./img/gametitle.png)
 
